@@ -7,11 +7,21 @@
   <meta name="description" content="DANCHE Training and Consultancy, Inc. is a CSC Accredited Learning and Development Institution delivering leadership, HR, and professional skills training for government and private organizations in the Philippines since 2016." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/styles.css" />
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
 </head>
 <body>
+
+  <!-- Ambient background orbs -->
+  <div class="orb-field" aria-hidden="true">
+    <div class="orb orb-1" data-speed="0.06"></div>
+    <div class="orb orb-2" data-speed="-0.04"></div>
+    <div class="orb orb-3" data-speed="0.09"></div>
+  </div>
+
+  <!-- Cursor glow (desktop only) -->
+  <div class="cursor-glow" id="cursor-glow" aria-hidden="true"></div>
 
   <!-- ====== Header / Navigation ====== -->
   <header class="site-header" id="top">
@@ -44,47 +54,74 @@
     <section class="hero">
       <div class="container hero-grid">
         <div class="hero-copy reveal">
-          <p class="eyebrow">CSC Accredited Learning &amp; Development Institution · PhilGEPS Platinum Member</p>
-          <h1>Navigating Change.<br />Empowering People.<br /><span class="accent">Transforming Lives.</span></h1>
+          <p class="eyebrow"><span class="eyebrow-diamond" aria-hidden="true">◆</span> CSC Accredited L&amp;D Institution · PhilGEPS Platinum Member</p>
+          <h1>
+            <span class="line">Navigating Change.</span>
+            <span class="line">Empowering People.</span>
+            <span class="line shimmer">Transforming Lives.</span>
+          </h1>
           <p class="lead">
             Since 2016, DANCHE Training and Consultancy, Inc. has equipped leaders and teams across
             government and private organizations with practical, high-impact training in leadership,
             human resources, and professional skills.
           </p>
           <div class="hero-actions">
-            <a href="#contact" class="btn btn-primary">Book a Training</a>
-            <a href="#programs" class="btn btn-ghost">Explore Programs</a>
+            <a href="#contact" class="btn btn-primary btn-lg">Book a Training <span aria-hidden="true">→</span></a>
+            <a href="#programs" class="btn btn-ghost btn-lg">Explore Programs</a>
           </div>
           <ul class="hero-stats" aria-label="Company highlights">
             <li><strong>2016</strong><span>Serving organizations since</span></li>
-            <li><strong>100+</strong><span>Clients guided</span></li>
-            <li><strong>18+ yrs</strong><span>Founder's HR expertise</span></li>
+            <li><strong><span class="counter" data-count="100">0</span>+</strong><span>Clients guided</span></li>
+            <li><strong><span class="counter" data-count="18">0</span>+ yrs</strong><span>Founder's HR expertise</span></li>
           </ul>
         </div>
-        <div class="hero-card reveal" aria-hidden="true">
+
+        <div class="hero-card tilt reveal" aria-hidden="true">
+          <div class="hero-card-glow"></div>
           <div class="hero-card-inner">
-            <span class="hero-badge">Our Mission</span>
+            <span class="hero-badge">✦ Our Mission</span>
             <p class="hero-card-words">
-              <span>Inform</span><span>Educate</span><span>Assist</span><span>Guide</span>
+              <span style="--i:0">Inform</span>
+              <span style="--i:1">Educate</span>
+              <span style="--i:2">Assist</span>
+              <span style="--i:3">Guide</span>
             </p>
             <p class="hero-card-note">Helping people find clarity and confidence in their careers — and helping organizations bring out the best in their people.</p>
           </div>
         </div>
       </div>
+
+      <a class="scroll-cue" href="#about" aria-label="Scroll to content">
+        <span class="scroll-cue-dot"></span>
+      </a>
     </section>
+
+    <!-- ====== Marquee ====== -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track" id="marquee-track">
+        <span>Leadership</span><i>✦</i>
+        <span>Communication</span><i>✦</i>
+        <span>Coaching &amp; Mentoring</span><i>✦</i>
+        <span>Supervisory Skills</span><i>✦</i>
+        <span>Competency Frameworks</span><i>✦</i>
+        <span>Performance Management</span><i>✦</i>
+        <span>Customer Experience</span><i>✦</i>
+        <span>Workplace Culture</span><i>✦</i>
+      </div>
+    </div>
 
     <!-- ====== Trust bar ====== -->
     <section class="trustbar" aria-label="Credentials">
       <div class="container trustbar-items">
-        <div class="trust-item reveal">
+        <div class="trust-item glass reveal">
           <span class="trust-icon" aria-hidden="true">✓</span>
           <p><strong>CSC Accredited</strong><br />Learning &amp; Development Institution (ALDI)</p>
         </div>
-        <div class="trust-item reveal">
+        <div class="trust-item glass reveal">
           <span class="trust-icon" aria-hidden="true">★</span>
           <p><strong>PhilGEPS Platinum</strong><br />Registered government supplier</p>
         </div>
-        <div class="trust-item reveal">
+        <div class="trust-item glass reveal">
           <span class="trust-icon" aria-hidden="true">◆</span>
           <p><strong>Public &amp; Private Sector</strong><br />Trusted by agencies and enterprises</p>
         </div>
@@ -95,8 +132,8 @@
     <section class="section" id="about">
       <div class="container about-grid">
         <div class="reveal">
-          <p class="eyebrow">About Us</p>
-          <h2>People can achieve far more than their current roles.</h2>
+          <p class="eyebrow"><span class="eyebrow-diamond" aria-hidden="true">◆</span> About Us</p>
+          <h2>People can achieve <em class="shimmer-soft">far more</em> than their current roles.</h2>
           <p>
             DANCHE Training and Consultancy, Inc. was founded on November 17, 2016 on a simple
             conviction: employees in every organization carry untapped potential. Our work is to
@@ -109,15 +146,15 @@
           </p>
         </div>
         <div class="mv-cards">
-          <article class="mv-card reveal">
+          <article class="mv-card glass gold-border reveal">
             <h3>Our Mission</h3>
             <p>To <strong>inform</strong>, <strong>educate</strong>, <strong>assist</strong>, and <strong>guide</strong> individuals who are uncertain about their career paths — empowering their personal and professional growth.</p>
           </article>
-          <article class="mv-card reveal">
+          <article class="mv-card glass gold-border reveal">
             <h3>Our Vision</h3>
             <p>Workplaces where every employee is developed beyond their current role, led by leaders who inspire confidence, clarity, and growth.</p>
           </article>
-          <article class="mv-card reveal">
+          <article class="mv-card glass gold-border reveal">
             <h3>Our Approach</h3>
             <p>Practical over theoretical. Every program is built from real consulting experience with 100+ organizations and focuses on immediately applicable tools.</p>
           </article>
@@ -126,51 +163,51 @@
     </section>
 
     <!-- ====== Programs ====== -->
-    <section class="section section-alt" id="programs">
+    <section class="section section-deep" id="programs">
       <div class="container">
         <div class="section-head reveal">
-          <p class="eyebrow">Training Programs</p>
-          <h2>High-impact workshops, tailored to your team</h2>
+          <p class="eyebrow centered"><span class="eyebrow-diamond" aria-hidden="true">◆</span> Training Programs</p>
+          <h2>High-impact workshops, <em class="shimmer-soft">tailored</em> to your team</h2>
           <p class="section-sub">Delivered on-site or online, for cohorts from frontline staff to the executive suite.</p>
         </div>
 
         <div class="program-grid">
-          <article class="program-card reveal">
+          <article class="program-card glass tilt reveal">
             <span class="program-icon" aria-hidden="true">🧭</span>
             <h3>Leadership Training — Advanced</h3>
             <p>For senior leaders and executives. Strategic leadership styles, decision-making, and techniques to inspire and mobilize whole organizations.</p>
           </article>
-          <article class="program-card reveal">
+          <article class="program-card glass tilt reveal">
             <span class="program-icon" aria-hidden="true">🪜</span>
             <h3>Leadership Training — Intermediate</h3>
             <p>For supervisors and middle managers stepping up: motivating teams, delegating well, and leading through day-to-day change.</p>
           </article>
-          <article class="program-card reveal">
+          <article class="program-card glass tilt reveal">
             <span class="program-icon" aria-hidden="true">💬</span>
             <h3>Communication Skills</h3>
             <p>Active listening, constructive feedback, and managing difficult conversations with confidence and professionalism.</p>
           </article>
-          <article class="program-card reveal">
+          <article class="program-card glass tilt reveal">
             <span class="program-icon" aria-hidden="true">🤝</span>
             <h3>Coaching &amp; Mentoring</h3>
             <p>Build a coaching culture. Practical frameworks for developing others, holding growth conversations, and mentoring future leaders.</p>
           </article>
-          <article class="program-card reveal">
+          <article class="program-card glass tilt reveal">
             <span class="program-icon" aria-hidden="true">📋</span>
             <h3>Supervisory Skills</h3>
             <p>The essential toolkit for new and seasoned supervisors: setting expectations, managing performance, and earning team trust.</p>
           </article>
-          <article class="program-card reveal">
+          <article class="program-card glass tilt reveal">
             <span class="program-icon" aria-hidden="true">🗂️</span>
             <h3>Competency Framework Development</h3>
             <p>Define the skills your organization actually needs — clear job descriptions, recruitment standards, and development pathways.</p>
           </article>
-          <article class="program-card reveal">
+          <article class="program-card glass tilt reveal">
             <span class="program-icon" aria-hidden="true">📈</span>
             <h3>Performance Management</h3>
             <p>Set clear expectations, run fair and useful appraisals, and address underperformance constructively.</p>
           </article>
-          <article class="program-card reveal">
+          <article class="program-card glass tilt reveal">
             <span class="program-icon" aria-hidden="true">🌱</span>
             <h3>Workplace Culture &amp; Wellbeing</h3>
             <p>Customer experience, respectful workplaces, and stress management programs that keep teams healthy and engaged.</p>
@@ -188,8 +225,8 @@
     <section class="section" id="why-danche">
       <div class="container why-grid">
         <div class="reveal">
-          <p class="eyebrow">Why DANCHE</p>
-          <h2>Training that comes from the field, not just the textbook</h2>
+          <p class="eyebrow"><span class="eyebrow-diamond" aria-hidden="true">◆</span> Why DANCHE</p>
+          <h2>Training that comes from the <em class="shimmer-soft">field</em>, not just the textbook</h2>
           <p>
             Our programs distill nearly two decades of hands-on HR consulting into best practices
             your team can apply immediately. We've sat on your side of the table — and it shows in
@@ -198,23 +235,24 @@
           <a href="#contact" class="btn btn-ghost">Talk to Us</a>
         </div>
         <ul class="why-list">
-          <li class="reveal"><strong>Accredited &amp; compliant.</strong> CSC ALDI accreditation and PhilGEPS Platinum membership make procurement straightforward for government clients.</li>
-          <li class="reveal"><strong>Practitioner-led.</strong> Sessions are facilitated by consultants who have solved these problems inside real organizations.</li>
-          <li class="reveal"><strong>Tailored, never templated.</strong> We adapt content, cases, and exercises to your sector, mandate, and people.</li>
-          <li class="reveal"><strong>Outcomes-focused.</strong> Participants leave with tools, templates, and action plans — not just certificates.</li>
+          <li class="glass reveal"><strong>Accredited &amp; compliant.</strong> CSC ALDI accreditation and PhilGEPS Platinum membership make procurement straightforward for government clients.</li>
+          <li class="glass reveal"><strong>Practitioner-led.</strong> Sessions are facilitated by consultants who have solved these problems inside real organizations.</li>
+          <li class="glass reveal"><strong>Tailored, never templated.</strong> We adapt content, cases, and exercises to your sector, mandate, and people.</li>
+          <li class="glass reveal"><strong>Outcomes-focused.</strong> Participants leave with tools, templates, and action plans — not just certificates.</li>
         </ul>
       </div>
     </section>
 
     <!-- ====== Founder ====== -->
-    <section class="section section-alt" id="founder">
+    <section class="section section-deep" id="founder">
       <div class="container founder-grid">
-        <div class="founder-photo reveal" aria-hidden="true">
+        <div class="founder-photo tilt reveal" aria-hidden="true">
+          <div class="founder-ring"></div>
           <div class="founder-initials">MAF</div>
         </div>
         <div class="reveal">
-          <p class="eyebrow">Our Founder</p>
-          <h2>Margarita Anne Flores-Torio, CHRP, CMC</h2>
+          <p class="eyebrow"><span class="eyebrow-diamond" aria-hidden="true">◆</span> Our Founder</p>
+          <h2>Margarita Anne Flores-Torio, <span class="creds">CHRP, CMC</span></h2>
           <p class="founder-role">Founder &amp; CEO</p>
           <p>
             An HR consultant for more than 18 years, Anne founded DANCHE in 2016 after seeing the
@@ -222,7 +260,7 @@
             far more than their current roles allow. She built DANCHE to close that gap — turning
             lessons from the field into workshops that inform, educate, assist, and guide.
           </p>
-          <blockquote class="founder-quote">
+          <blockquote class="founder-quote glass gold-border">
             "When people gain clarity about who they are and where they're going, organizations transform with them."
           </blockquote>
         </div>
@@ -231,10 +269,11 @@
 
     <!-- ====== CTA band ====== -->
     <section class="cta-band">
+      <div class="cta-band-bg" aria-hidden="true"></div>
       <div class="container cta-band-inner reveal">
-        <h2>Ready to empower your people?</h2>
+        <h2>Ready to <span class="shimmer">empower</span> your people?</h2>
         <p>Book a consultation and let's design the right program for your organization.</p>
-        <a href="#contact" class="btn btn-light">Get Started</a>
+        <a href="#contact" class="btn btn-primary btn-lg">Get Started <span aria-hidden="true">→</span></a>
       </div>
     </section>
 
@@ -242,8 +281,8 @@
     <section class="section" id="contact">
       <div class="container contact-grid">
         <div class="reveal">
-          <p class="eyebrow">Contact</p>
-          <h2>Let's start the conversation</h2>
+          <p class="eyebrow"><span class="eyebrow-diamond" aria-hidden="true">◆</span> Contact</p>
+          <h2>Let's start the <em class="shimmer-soft">conversation</em></h2>
           <ul class="contact-list">
             <li>
               <span class="contact-label">Office</span>
@@ -264,7 +303,7 @@
           </ul>
         </div>
 
-        <form class="contact-form reveal" id="contact-form" novalidate>
+        <form class="contact-form glass gold-border reveal" id="contact-form" novalidate>
           <div class="form-row">
             <label for="cf-name">Name</label>
             <input id="cf-name" name="name" type="text" autocomplete="name" required placeholder="Your full name" />
