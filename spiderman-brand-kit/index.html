@@ -3,19 +3,28 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Web-Slingers Collective — Google Workspace Project</title>
-<meta name="description" content="Brand kit draft: a Spider-Man-inspired, elegant crimson, liquid-glass one-page site demonstrating team communication, collaboration, and organization with Google Workspace." />
+<title>Web-Slingers Collective — Google Workspace Group Project</title>
+<meta name="description" content="A one-page record of how our group planned, split, and finished a project using Google Workspace." />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='16' fill='%23b3122f'/%3E%3Cg stroke='%23f7ecec' stroke-width='1' fill='none'%3E%3Ccircle cx='16' cy='16' r='6'/%3E%3Ccircle cx='16' cy='16' r='11'/%3E%3Cline x1='16' y1='2' x2='16' y2='30'/%3E%3Cline x1='2' y1='16' x2='30' y2='16'/%3E%3Cline x1='6' y1='6' x2='26' y2='26'/%3E%3Cline x1='26' y1='6' x2='6' y2='26'/%3E%3C/g%3E%3C/svg%3E">
 <style>
 /* ============================================================
-   Web-Slingers Collective — Spider-Man-inspired brand kit
-   Elegant crimson + liquid glass
-   Inlined on purpose: pasting this whole file into Google Sites'
-   "Embed code" box requires everything in one <style> block —
-   no external stylesheet reference will resolve there.
+   Web-Slingers Collective
+   Crimson + liquid glass, built to survive a Google Sites embed.
+
+   Embed notes (why the CSS looks like this):
+   - No position:fixed anywhere. Inside an iframe it pins to the
+     iframe viewport and goes glitchy on iOS Safari. Absolute layers
+     over a position:relative body behave the same everywhere.
+   - No 100vh sizing. In an embed, vh resolves to the iframe height,
+     which the person placing the embed picks by dragging a handle.
+     Padding-based sizing looks right at any box height.
+   - scroll-margin-top on every section so the sticky nav doesn't
+     cover a heading when an anchor link fires inside the frame.
+   - All CSS inlined. An external stylesheet reference will not
+     resolve when this is pasted into the Embed code box.
    ============================================================ */
 
 :root {
@@ -23,17 +32,16 @@
   --crimson-deep: #7a0d21;
   --crimson-bright: #e21833;
   --ink: #0b0507;
-  --ink-soft: #150a0d;
   --paper: #f7ecec;
-  --glass-fill: rgba(255, 255, 255, 0.06);
+  --glass-fill: rgba(255, 255, 255, 0.055);
   --glass-fill-strong: rgba(255, 255, 255, 0.1);
-  --glass-border: rgba(255, 255, 255, 0.14);
+  --glass-border: rgba(255, 255, 255, 0.13);
   --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(255, 255, 255, 0.03) inset;
   --text-primary: #f7ecec;
-  --text-muted: rgba(247, 236, 236, 0.68);
-  --radius: 22px;
-  --font-display: "Poppins", "Segoe UI", system-ui, sans-serif;
-  --font-body: "Inter", "Segoe UI", system-ui, sans-serif;
+  --text-muted: rgba(247, 236, 236, 0.66);
+  --radius: 20px;
+  --font-display: "Poppins", "Segoe UI", Roboto, system-ui, sans-serif;
+  --font-body: "Inter", "Segoe UI", Roboto, system-ui, sans-serif;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -41,38 +49,45 @@
 html { scroll-behavior: smooth; }
 
 body {
+  position: relative;
   font-family: var(--font-body);
   color: var(--text-primary);
   background: var(--ink);
   overflow-x: hidden;
   line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
 }
 
-/* ---------- background: web lines + glow ---------- */
+/* ---------- background layers ---------- */
 
 .web-backdrop {
-  position: fixed;
+  position: absolute;
   inset: 0;
   z-index: -2;
+  /* Glows are spread down the whole document, not just the first screen.
+     This layer spans the full scroll height, so a top-only glow would
+     leave everything below the hero flat black. */
   background:
-    radial-gradient(ellipse 60% 45% at 18% 8%, rgba(226, 24, 51, 0.35), transparent 60%),
-    radial-gradient(ellipse 55% 40% at 85% 15%, rgba(179, 18, 47, 0.28), transparent 60%),
-    radial-gradient(ellipse 70% 50% at 50% 100%, rgba(122, 13, 33, 0.4), transparent 60%),
-    linear-gradient(180deg, #0b0507 0%, #150a0d 45%, #0b0507 100%);
+    radial-gradient(760px 520px at 12% 2%, rgba(226, 24, 51, 0.30), transparent 60%),
+    radial-gradient(640px 440px at 88% 9%, rgba(179, 18, 47, 0.22), transparent 60%),
+    radial-gradient(720px 500px at 92% 32%, rgba(226, 24, 51, 0.17), transparent 62%),
+    radial-gradient(760px 520px at 6% 52%, rgba(179, 18, 47, 0.19), transparent 62%),
+    radial-gradient(700px 480px at 88% 72%, rgba(226, 24, 51, 0.15), transparent 62%),
+    radial-gradient(900px 620px at 50% 99%, rgba(122, 13, 33, 0.32), transparent 64%),
+    linear-gradient(180deg, #0b0507 0%, #140a0d 45%, #0b0507 100%);
 }
 
 .web-lines {
-  position: fixed;
+  position: absolute;
   inset: 0;
   z-index: -1;
-  opacity: 0.16;
+  opacity: 0.13;
   pointer-events: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400' viewBox='0 0 400 400'%3E%3Cg fill='none' stroke='%23e21833' stroke-width='0.6'%3E%3Ccircle cx='200' cy='200' r='40'/%3E%3Ccircle cx='200' cy='200' r='80'/%3E%3Ccircle cx='200' cy='200' r='120'/%3E%3Ccircle cx='200' cy='200' r='160'/%3E%3Ccircle cx='200' cy='200' r='200'/%3E%3Cline x1='200' y1='0' x2='200' y2='400'/%3E%3Cline x1='0' y1='200' x2='400' y2='200'/%3E%3Cline x1='58' y1='58' x2='342' y2='342'/%3E%3Cline x1='342' y1='58' x2='58' y2='342'/%3E%3Cline x1='200' y1='0' x2='30' y2='115'/%3E%3Cline x1='200' y1='0' x2='370' y2='115'/%3E%3Cline x1='400' y1='200' x2='285' y2='30'/%3E%3Cline x1='400' y1='200' x2='285' y2='370'/%3E%3Cline x1='200' y1='400' x2='370' y2='285'/%3E%3Cline x1='200' y1='400' x2='30' y2='285'/%3E%3Cline x1='0' y1='200' x2='115' y2='30'/%3E%3Cline x1='0' y1='200' x2='115' y2='370'/%3E%3C/g%3E%3C/svg%3E");
-  background-size: 480px 480px;
-  background-repeat: repeat;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='600' viewBox='0 0 600 600'%3E%3Cg fill='none' stroke='%23e21833' stroke-width='0.7'%3E%3Ccircle cx='300' cy='300' r='70'/%3E%3Ccircle cx='300' cy='300' r='140'/%3E%3Ccircle cx='300' cy='300' r='210'/%3E%3Ccircle cx='300' cy='300' r='280'/%3E%3Cline x1='300' y1='20' x2='300' y2='580'/%3E%3Cline x1='20' y1='300' x2='580' y2='300'/%3E%3Cline x1='102' y1='102' x2='498' y2='498'/%3E%3Cline x1='498' y1='102' x2='102' y2='498'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 620px 620px;
 }
 
-/* ---------- glass utility ---------- */
+/* ---------- glass ---------- */
 
 .glass {
   background: var(--glass-fill);
@@ -83,23 +98,30 @@ body {
   box-shadow: var(--glass-shadow);
 }
 
-/* ---------- layout shell ---------- */
+/* ---------- shell ---------- */
 
 .wrap {
   max-width: 1120px;
   margin: 0 auto;
-  padding: 0 clamp(20px, 4vw, 48px);
+  padding-left: clamp(20px, 4vw, 48px);
+  padding-right: clamp(20px, 4vw, 48px);
 }
 
-section { padding: clamp(64px, 10vw, 120px) 0; position: relative; }
+section {
+  padding-top: clamp(52px, 6vw, 84px);
+  padding-bottom: clamp(52px, 6vw, 84px);
+  scroll-margin-top: 90px;
+  position: relative;
+}
 
 .eyebrow {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 9px;
   font-family: var(--font-display);
-  font-size: 0.72rem;
-  letter-spacing: 0.22em;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--crimson-bright);
   margin-bottom: 14px;
@@ -110,42 +132,39 @@ section { padding: clamp(64px, 10vw, 120px) 0; position: relative; }
   width: 22px;
   height: 1px;
   background: var(--crimson-bright);
-  display: inline-block;
 }
 
-h1, h2, h3 {
-  font-family: var(--font-display);
-  font-weight: 600;
-  letter-spacing: -0.01em;
-}
+h1, h2, h3 { font-family: var(--font-display); font-weight: 600; letter-spacing: -0.015em; }
 
-h2 {
-  font-size: clamp(1.7rem, 3.2vw, 2.4rem);
-  margin-bottom: 14px;
-}
+h2 { font-size: clamp(1.65rem, 3vw, 2.3rem); line-height: 1.15; margin-bottom: 14px; }
 
 .section-lede {
   color: var(--text-muted);
-  max-width: 640px;
-  font-size: 1.02rem;
-  margin-bottom: 44px;
+  max-width: 620px;
+  font-size: 1rem;
+  margin-bottom: 42px;
 }
 
 /* ---------- nav ---------- */
 
 nav.glass {
   position: sticky;
-  top: 18px;
-  left: 50%;
-  transform: translateX(-50%);
+  top: 16px;
   z-index: 50;
-  width: min(920px, calc(100% - 32px));
-  margin: 18px auto 0;
+  max-width: 920px;
+  margin: 16px auto 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 12px 22px;
+  gap: 16px;
+  padding: 11px 20px;
   border-radius: 999px;
+  /* Opaque dark tint, not the usual white-tinted glass. A sticky bar
+     scrolls over its own headings, and at 6% white the text underneath
+     stayed legible through the blur and read as a rendering bug. */
+  background: rgba(18, 8, 11, 0.82);
+  backdrop-filter: blur(20px) saturate(150%);
+  -webkit-backdrop-filter: blur(20px) saturate(150%);
 }
 
 .brand {
@@ -154,78 +173,63 @@ nav.glass {
   gap: 10px;
   font-family: var(--font-display);
   font-weight: 600;
-  font-size: 1rem;
-  letter-spacing: 0.01em;
+  font-size: 0.95rem;
+  white-space: nowrap;
 }
 
 .brand-mark {
-  width: 30px;
-  height: 30px;
+  width: 29px;
+  height: 29px;
   border-radius: 50%;
-  background: radial-gradient(circle at 35% 30%, var(--crimson-bright), var(--crimson-deep) 70%);
+  background: radial-gradient(circle at 35% 30%, var(--crimson-bright), var(--crimson-deep) 72%);
   display: grid;
   place-items: center;
-  box-shadow: 0 0 14px rgba(226, 24, 51, 0.55);
+  box-shadow: 0 0 14px rgba(226, 24, 51, 0.5);
   flex-shrink: 0;
 }
 
-.brand-mark svg { width: 18px; height: 18px; }
+.brand-mark svg { width: 17px; height: 17px; }
 
-.nav-links {
-  display: flex;
-  gap: 26px;
-  list-style: none;
-  font-size: 0.88rem;
-}
+.nav-links { display: flex; gap: 24px; list-style: none; font-size: 0.86rem; }
 
-.nav-links a {
-  color: var(--text-muted);
-  text-decoration: none;
-  transition: color 0.2s ease;
-}
-
+.nav-links a { color: var(--text-muted); text-decoration: none; transition: color 0.2s ease; }
 .nav-links a:hover { color: var(--text-primary); }
 
 .nav-cta {
   font-family: var(--font-display);
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   font-weight: 600;
   color: #fff;
   background: linear-gradient(135deg, var(--crimson-bright), var(--crimson-deep));
-  padding: 9px 18px;
+  padding: 9px 17px;
   border-radius: 999px;
   text-decoration: none;
-  box-shadow: 0 6px 20px rgba(226, 24, 51, 0.35);
+  box-shadow: 0 6px 20px rgba(226, 24, 51, 0.32);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   white-space: nowrap;
 }
 
-.nav-cta:hover { transform: translateY(-1px); box-shadow: 0 10px 26px rgba(226, 24, 51, 0.5); }
+.nav-cta:hover { transform: translateY(-1px); box-shadow: 0 10px 26px rgba(226, 24, 51, 0.48); }
 
 /* ---------- hero ---------- */
 
-.hero {
-  min-height: min(100vh, 760px);
-  display: flex;
-  align-items: center;
-  padding-top: 60px;
-}
+.hero { padding-top: clamp(56px, 7vw, 92px); }
 
 .hero-grid {
   display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
-  gap: 48px;
+  grid-template-columns: 1.08fr 0.92fr;
+  gap: 46px;
   align-items: center;
 }
 
 .hero h1 {
-  font-size: clamp(2.4rem, 5.4vw, 4.1rem);
-  line-height: 1.05;
+  font-size: clamp(2.3rem, 5vw, 3.9rem);
+  line-height: 1.04;
   margin-bottom: 20px;
 }
 
 .hero h1 span {
-  background: linear-gradient(120deg, var(--crimson-bright), #ff5470 60%, var(--crimson-bright));
+  background: linear-gradient(120deg, var(--crimson-bright), #ff5c76 62%, var(--crimson-bright));
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -233,75 +237,65 @@ nav.glass {
 
 .hero p.lede {
   color: var(--text-muted);
-  font-size: 1.1rem;
-  max-width: 480px;
-  margin-bottom: 32px;
+  font-size: 1.08rem;
+  max-width: 460px;
+  margin-bottom: 30px;
 }
 
-.hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+.hero-actions { display: flex; gap: 13px; flex-wrap: wrap; }
+
+.btn-primary, .btn-ghost {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 13px 25px;
+  border-radius: 13px;
+  text-decoration: none;
+  display: inline-block;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
 
 .btn-primary {
-  font-family: var(--font-display);
-  font-weight: 600;
-  font-size: 0.92rem;
   color: #fff;
   background: linear-gradient(135deg, var(--crimson-bright), var(--crimson-deep));
-  padding: 14px 26px;
-  border-radius: 14px;
-  text-decoration: none;
-  box-shadow: 0 10px 30px rgba(226, 24, 51, 0.4);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  display: inline-block;
+  box-shadow: 0 10px 30px rgba(226, 24, 51, 0.36);
 }
 
-.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 14px 36px rgba(226, 24, 51, 0.55); }
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 14px 36px rgba(226, 24, 51, 0.52); }
 
 .btn-ghost {
-  font-family: var(--font-display);
-  font-weight: 600;
-  font-size: 0.92rem;
   color: var(--text-primary);
   background: var(--glass-fill);
   border: 1px solid var(--glass-border);
-  backdrop-filter: blur(16px);
-  padding: 14px 26px;
-  border-radius: 14px;
-  text-decoration: none;
-  transition: background 0.2s ease, transform 0.2s ease;
-  display: inline-block;
 }
 
 .btn-ghost:hover { background: var(--glass-fill-strong); transform: translateY(-2px); }
 
-.hero-card {
-  padding: 30px;
-  position: relative;
-}
+.hero-card { padding: 28px; }
 
-.hero-card .tag-row { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
+.tag-row { display: flex; gap: 8px; margin-bottom: 18px; flex-wrap: wrap; }
 
 .tag {
-  font-size: 0.72rem;
+  font-size: 0.7rem;
   font-family: var(--font-display);
-  letter-spacing: 0.04em;
+  font-weight: 500;
+  letter-spacing: 0.05em;
   padding: 6px 12px;
   border-radius: 999px;
-  background: rgba(226, 24, 51, 0.14);
-  border: 1px solid rgba(226, 24, 51, 0.3);
-  color: #ffb3c0;
+  background: rgba(226, 24, 51, 0.13);
+  border: 1px solid rgba(226, 24, 51, 0.28);
+  color: #ffb0be;
 }
 
-.hero-card .stat-row {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 14px;
-  margin-top: 24px;
-}
+.hero-card h3 { font-size: 1.05rem; }
+.hero-card p { color: var(--text-muted); font-size: 0.93rem; margin-top: 9px; }
+
+.stat-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 22px; }
 
 .stat {
   text-align: center;
-  padding: 16px 8px;
-  border-radius: 14px;
+  padding: 15px 8px;
+  border-radius: 13px;
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
@@ -309,147 +303,136 @@ nav.glass {
 .stat strong {
   display: block;
   font-family: var(--font-display);
-  font-size: 1.5rem;
+  font-size: 1.45rem;
+  line-height: 1.1;
   color: var(--crimson-bright);
 }
 
-.stat span { font-size: 0.74rem; color: var(--text-muted); }
+.stat span { font-size: 0.72rem; color: var(--text-muted); }
 
-/* ---------- grid cards ---------- */
+/* ---------- cards ---------- */
 
-.card-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 22px;
-}
+.card-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
 
 .card {
-  padding: 28px 24px;
+  padding: 26px 24px;
   transition: transform 0.25s ease, border-color 0.25s ease;
 }
 
-.card:hover { transform: translateY(-4px); border-color: rgba(226, 24, 51, 0.4); }
+.card:hover { transform: translateY(-4px); border-color: rgba(226, 24, 51, 0.38); }
 
 .card-icon {
-  width: 46px;
-  height: 46px;
-  border-radius: 14px;
+  width: 44px;
+  height: 44px;
+  border-radius: 13px;
   display: grid;
   place-items: center;
-  background: linear-gradient(135deg, rgba(226, 24, 51, 0.35), rgba(122, 13, 33, 0.35));
-  margin-bottom: 16px;
-  font-size: 1.3rem;
+  background: linear-gradient(135deg, rgba(226, 24, 51, 0.32), rgba(122, 13, 33, 0.3));
+  border: 1px solid rgba(226, 24, 51, 0.22);
+  margin-bottom: 15px;
+  color: #ff8fa3;
 }
 
-.card h3 { font-size: 1.05rem; margin-bottom: 8px; }
-.card p { color: var(--text-muted); font-size: 0.92rem; }
+.card-icon svg { width: 21px; height: 21px; }
+
+.card h3 { font-size: 1.02rem; margin-bottom: 7px; }
+.card p { color: var(--text-muted); font-size: 0.91rem; }
 
 /* ---------- team ---------- */
 
-.team-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
-}
+.team-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
 
-.member {
-  padding: 26px 20px;
-  text-align: center;
-}
+.member { padding: 26px 20px; text-align: center; }
 
 .avatar {
-  width: 64px;
-  height: 64px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
-  margin: 0 auto 16px;
-  background: radial-gradient(circle at 35% 30%, var(--crimson-bright), var(--crimson-deep) 75%);
+  margin: 0 auto 15px;
+  background: radial-gradient(circle at 35% 30%, var(--crimson-bright), var(--crimson-deep) 78%);
   display: grid;
   place-items: center;
-  box-shadow: 0 0 22px rgba(226, 24, 51, 0.4);
+  box-shadow: 0 0 20px rgba(226, 24, 51, 0.34);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: #fff;
+  letter-spacing: 0.02em;
 }
 
-.avatar svg { width: 30px; height: 30px; }
+.member h3 { font-size: 0.98rem; margin-bottom: 3px; }
 
-.member h3 { font-size: 1rem; margin-bottom: 4px; }
-.member .role { color: var(--crimson-bright); font-size: 0.78rem; font-family: var(--font-display); letter-spacing: 0.03em; margin-bottom: 10px; }
-.member p.desc { font-size: 0.85rem; color: var(--text-muted); }
+.member .role {
+  color: var(--crimson-bright);
+  font-size: 0.76rem;
+  font-family: var(--font-display);
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  margin-bottom: 9px;
+}
+
+.member p.desc { font-size: 0.84rem; color: var(--text-muted); }
 
 /* ---------- timeline ---------- */
 
-.timeline { display: flex; flex-direction: column; gap: 0; }
+.timeline-item { display: grid; grid-template-columns: 84px 22px 1fr; gap: 16px; }
 
-.timeline-item {
-  display: grid;
-  grid-template-columns: 90px 24px 1fr;
-  gap: 18px;
-}
-
-.timeline-item .tl-date {
+.tl-date {
   font-family: var(--font-display);
-  font-size: 0.82rem;
+  font-size: 0.8rem;
+  font-weight: 500;
   color: var(--text-muted);
-  padding-top: 22px;
+  padding-top: 21px;
 }
 
-.timeline-item .tl-line {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
+.tl-line { display: flex; flex-direction: column; align-items: center; }
 
 .tl-dot {
-  width: 14px;
-  height: 14px;
+  width: 13px;
+  height: 13px;
   border-radius: 50%;
   margin-top: 20px;
   background: var(--crimson-bright);
-  box-shadow: 0 0 0 4px rgba(226, 24, 51, 0.18);
+  box-shadow: 0 0 0 4px rgba(226, 24, 51, 0.16);
+  flex-shrink: 0;
 }
 
 .tl-bar { flex: 1; width: 1px; background: var(--glass-border); }
 
 .timeline-item:last-child .tl-bar { display: none; }
 
-.tl-card {
-  padding: 20px 24px;
-  margin-bottom: 20px;
-}
+.tl-card { padding: 19px 23px; margin-bottom: 18px; }
+.tl-card h3 { font-size: 0.98rem; margin-bottom: 5px; }
+.tl-card p { color: var(--text-muted); font-size: 0.87rem; }
 
-.tl-card h3 { font-size: 1rem; margin-bottom: 6px; }
-.tl-card p { color: var(--text-muted); font-size: 0.88rem; }
+/* ---------- ground rules ---------- */
 
-/* ---------- comms plan ---------- */
+.plan-panel { padding: 36px; display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
 
-.plan-panel { padding: 40px; display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
-
-.plan-panel ul { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+.plan-panel ul { list-style: none; display: flex; flex-direction: column; gap: 13px; }
 
 .plan-panel li {
   display: flex;
   gap: 12px;
   align-items: flex-start;
-  font-size: 0.94rem;
+  font-size: 0.93rem;
   color: var(--text-muted);
 }
 
 .plan-panel li::before {
   content: "";
-  width: 8px;
-  height: 8px;
-  margin-top: 7px;
+  width: 7px;
+  height: 7px;
+  margin-top: 8px;
   border-radius: 50%;
   background: var(--crimson-bright);
   flex-shrink: 0;
-  box-shadow: 0 0 8px rgba(226, 24, 51, 0.6);
+  box-shadow: 0 0 8px rgba(226, 24, 51, 0.55);
 }
 
 /* ---------- footer ---------- */
 
-footer {
-  padding: 50px 0 40px;
-  border-top: 1px solid var(--glass-border);
-  margin-top: 40px;
-}
+footer { padding: 44px 0 40px; border-top: 1px solid var(--glass-border); margin-top: 30px; }
 
 .footer-row {
   display: flex;
@@ -459,27 +442,34 @@ footer {
   gap: 16px;
 }
 
-.footer-row p { color: var(--text-muted); font-size: 0.85rem; }
+.footer-row p { color: var(--text-muted); font-size: 0.84rem; }
 
 .footer-links { display: flex; gap: 20px; list-style: none; }
-.footer-links a { color: var(--text-muted); text-decoration: none; font-size: 0.85rem; }
+.footer-links a { color: var(--text-muted); text-decoration: none; font-size: 0.84rem; }
 .footer-links a:hover { color: var(--crimson-bright); }
 
 /* ---------- responsive ---------- */
 
-@media (max-width: 860px) {
-  .hero-grid { grid-template-columns: 1fr; }
+@media (max-width: 900px) {
+  .hero-grid { grid-template-columns: 1fr; gap: 34px; }
   .card-grid { grid-template-columns: repeat(2, 1fr); }
   .team-grid { grid-template-columns: repeat(2, 1fr); }
-  .plan-panel { grid-template-columns: 1fr; }
+  .plan-panel { grid-template-columns: 1fr; gap: 13px; }
   .nav-links { display: none; }
 }
 
 @media (max-width: 560px) {
   .card-grid { grid-template-columns: 1fr; }
   .team-grid { grid-template-columns: 1fr; }
-  .timeline-item { grid-template-columns: 70px 20px 1fr; }
-  .hero-card .stat-row { grid-template-columns: 1fr; }
+  .timeline-item { grid-template-columns: 64px 20px 1fr; gap: 12px; }
+  .stat-row { grid-template-columns: repeat(3, 1fr); }
+  .plan-panel { padding: 26px; }
+  .brand span.brand-text { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { transition: none !important; }
 }
 </style>
 </head>
@@ -491,18 +481,18 @@ footer {
 <nav class="glass">
   <div class="brand">
     <span class="brand-mark">
-      <svg viewBox="0 0 24 24" fill="none" stroke="#f7ecec" stroke-width="1.2"><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="8"/><line x1="12" y1="1" x2="12" y2="23"/><line x1="1" y1="12" x2="23" y2="12"/><line x1="4" y1="4" x2="20" y2="20"/><line x1="20" y1="4" x2="4" y2="20"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="#f7ecec" stroke-width="1.2" aria-hidden="true"><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="8"/><line x1="12" y1="1" x2="12" y2="23"/><line x1="1" y1="12" x2="23" y2="12"/><line x1="4" y1="4" x2="20" y2="20"/><line x1="20" y1="4" x2="4" y2="20"/></svg>
     </span>
-    Web-Slingers Collective
+    <span class="brand-text">Web-Slingers Collective</span>
   </div>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
     <li><a href="#team">Team</a></li>
-    <li><a href="#toolkit">Toolkit</a></li>
+    <li><a href="#tools">Tools</a></li>
     <li><a href="#timeline">Timeline</a></li>
-    <li><a href="#comms">Communication</a></li>
+    <li><a href="#rules">Rules</a></li>
   </ul>
-  <a class="nav-cta" href="#guidelines">Project Guidelines</a>
+  <a class="nav-cta" href="#brief">The brief</a>
 </nav>
 
 <main>
@@ -512,14 +502,14 @@ footer {
     <div class="hero-grid">
       <div>
         <p class="eyebrow">Google Workspace Group Project</p>
-        <h1>Our web of <span>collaboration</span>, spun in Workspace.</h1>
+        <h1>We split the work. <span>Nothing got lost.</span></h1>
         <p class="lede">
-          A one-page showcase of how our team communicates, organizes, and delivers together —
-          powered end-to-end by Google Docs, Sheets, Slides, Drive, Calendar, and Meet.
+          Four people, six Google tools, four weeks. This page shows who did what,
+          and where every file ended up.
         </p>
         <div class="hero-actions">
-          <a class="btn-primary" href="#guidelines">View Project Guidelines</a>
-          <a class="btn-ghost" href="#toolkit">See Our Toolkit</a>
+          <a class="btn-primary" href="#brief">Read the brief</a>
+          <a class="btn-ghost" href="#tools">See the tools</a>
         </div>
       </div>
 
@@ -527,18 +517,16 @@ footer {
         <div class="tag-row">
           <span class="tag">GROUP PROJECT</span>
           <span class="tag">SEM 2 · 2026</span>
-          <span class="tag">LIVE SITE</span>
         </div>
-        <h3>Mission Brief</h3>
-        <p style="color:var(--text-muted); font-size:0.94rem; margin-top:10px;">
-          Demonstrate our team's ability to communicate, collaborate, and organize
-          information clearly — built entirely with Google Workspace tools and
-          published as a single, elegant Google Site.
+        <h3>What we were asked to do</h3>
+        <p>
+          Show that a group can organize itself without losing track of who owns what.
+          We ran the whole project through Google Workspace and published the result here.
         </p>
         <div class="stat-row">
-          <div class="stat"><strong>6</strong><span>Team Members</span></div>
-          <div class="stat"><strong>6</strong><span>Workspace Tools</span></div>
-          <div class="stat"><strong>1</strong><span>Shared Site</span></div>
+          <div class="stat"><strong>4</strong><span>Members</span></div>
+          <div class="stat"><strong>6</strong><span>Tools</span></div>
+          <div class="stat"><strong>4</strong><span>Weeks</span></div>
         </div>
       </div>
     </div>
@@ -546,159 +534,176 @@ footer {
 
   <!-- ABOUT -->
   <section id="about" class="wrap">
-    <p class="eyebrow">About This Site</p>
-    <h2>Built to prove one thing: we work well together.</h2>
+    <p class="eyebrow">About this page</p>
+    <h2>The short version</h2>
     <p class="section-lede">
-      This page is our team's central web — every strand connects back to a Google Workspace
-      tool we used to plan, draft, review, and ship this project as a group.
+      Every claim here points at a real file. The tracker, the notes, and the deck all sit
+      in one shared Drive folder that any of us can open.
     </p>
     <div class="card-grid">
       <div class="card glass">
-        <div class="card-icon">🕸️</div>
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.3L3 21l1.2-3.6A8.4 8.4 0 1 1 21 11.5Z"/></svg>
+        </div>
         <h3>Communicate</h3>
-        <p>Daily check-ins and async updates kept everyone aligned, from kickoff to final review.</p>
+        <p>We met Mondays and wrote it all down. Anyone who missed a call read the notes and caught up the same day.</p>
       </div>
       <div class="card glass">
-        <div class="card-icon">🤝</div>
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 20v-1.8a3.6 3.6 0 0 0-3.6-3.6H6.6A3.6 3.6 0 0 0 3 18.2V20"/><circle cx="9.5" cy="7.4" r="3.4"/><path d="M21 20v-1.8a3.6 3.6 0 0 0-2.7-3.5"/><path d="M15.3 4.2a3.6 3.6 0 0 1 0 6.9"/></svg>
+        </div>
         <h3>Collaborate</h3>
-        <p>Shared documents and live co-editing let the whole team contribute in real time.</p>
+        <p>Four people editing one doc at once. Comments live in the file instead of a chain of attachments in email.</p>
       </div>
       <div class="card glass">
-        <div class="card-icon">🗂️</div>
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7.5A1.5 1.5 0 0 1 4.5 6h4.2l2 2.4h8.8A1.5 1.5 0 0 1 21 9.9v7.6a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 17.5Z"/></svg>
+        </div>
         <h3>Organize</h3>
-        <p>A single shared Drive kept every draft, asset, and decision easy to find.</p>
+        <p>One Drive folder. Subfolders by week. A naming rule everyone actually follows.</p>
       </div>
     </div>
   </section>
 
   <!-- TEAM -->
   <section id="team" class="wrap">
-    <p class="eyebrow">Meet the Team</p>
-    <h2>The people behind the web</h2>
-    <p class="section-lede">Swap in your group's real names, roles, and photos before publishing.</p>
+    <p class="eyebrow">Who did what</p>
+    <h2>Four people, four jobs</h2>
+    <p class="section-lede">Swap in your group's real names and photos before you publish.</p>
     <div class="team-grid">
       <div class="member glass">
-        <div class="avatar"><svg viewBox="0 0 24 24" fill="none" stroke="#f7ecec" stroke-width="1.3"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="7"/></svg></div>
+        <div class="avatar">01</div>
         <h3>Member One</h3>
         <p class="role">Project Lead</p>
-        <p class="desc">Coordinates timelines and keeps the team's shared Calendar on track.</p>
+        <p class="desc">Set the deadlines, ran the Monday calls, chased anyone who went quiet.</p>
       </div>
       <div class="member glass">
-        <div class="avatar"><svg viewBox="0 0 24 24" fill="none" stroke="#f7ecec" stroke-width="1.3"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="7"/></svg></div>
+        <div class="avatar">02</div>
         <h3>Member Two</h3>
         <p class="role">Content &amp; Docs</p>
-        <p class="desc">Drafts and edits shared write-ups in Google Docs.</p>
+        <p class="desc">Wrote and edited the copy. Owned the shared doc.</p>
       </div>
       <div class="member glass">
-        <div class="avatar"><svg viewBox="0 0 24 24" fill="none" stroke="#f7ecec" stroke-width="1.3"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="7"/></svg></div>
+        <div class="avatar">03</div>
         <h3>Member Three</h3>
         <p class="role">Data &amp; Sheets</p>
-        <p class="desc">Tracks tasks and metrics in a shared Google Sheet.</p>
+        <p class="desc">Built the tracker and updated it after every work session.</p>
       </div>
       <div class="member glass">
-        <div class="avatar"><svg viewBox="0 0 24 24" fill="none" stroke="#f7ecec" stroke-width="1.3"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="7"/></svg></div>
+        <div class="avatar">04</div>
         <h3>Member Four</h3>
         <p class="role">Design &amp; Slides</p>
-        <p class="desc">Builds the visual story in Google Slides for presentations.</p>
+        <p class="desc">Made the deck and the visuals for presentation day.</p>
       </div>
     </div>
   </section>
 
-  <!-- TOOLKIT -->
-  <section id="toolkit" class="wrap">
-    <p class="eyebrow">Our Toolkit</p>
-    <h2>Every strand is a Workspace tool</h2>
-    <p class="section-lede">How each tool powered a different part of getting this project done.</p>
+  <!-- TOOLS -->
+  <section id="tools" class="wrap">
+    <p class="eyebrow">The tools</p>
+    <h2>What each one was for</h2>
+    <p class="section-lede">Six tools, six jobs, no overlap.</p>
     <div class="card-grid">
       <div class="card glass">
-        <div class="card-icon">📄</div>
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8Z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h4"/></svg>
+        </div>
         <h3>Google Docs</h3>
-        <p>Shared outlines, meeting notes, and the project write-up — all edited live together.</p>
+        <p>Meeting notes and the write-up. One file, everyone editing it at once.</p>
       </div>
       <div class="card glass">
-        <div class="card-icon">📊</div>
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9.5h18M3 15h18M9.5 4v16"/></svg>
+        </div>
         <h3>Google Sheets</h3>
-        <p>Task tracker, timeline, and role assignments kept in one shared source of truth.</p>
+        <p>The task tracker. Owner, status, and due date on every row.</p>
       </div>
       <div class="card glass">
-        <div class="card-icon">🖼️</div>
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M12 16v4M8.5 20h7"/></svg>
+        </div>
         <h3>Google Slides</h3>
-        <p>Our pitch deck and visual assets, built collaboratively for presentation day.</p>
+        <p>The presentation deck, built by whoever had time that week.</p>
       </div>
       <div class="card glass">
-        <div class="card-icon">🗄️</div>
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m8.6 3.5 6.8 11.8"/><path d="M15.4 3.5H8.6L2.2 14.6h6.8Z"/><path d="M2.2 14.6 5.6 20.5h12.8l3.4-5.9Z"/></svg>
+        </div>
         <h3>Google Drive</h3>
-        <p>A shared folder structure keeping drafts, assets, and final files organized.</p>
+        <p>One folder, subfolders by week, and the naming rule written in the README.</p>
       </div>
       <div class="card glass">
-        <div class="card-icon">📅</div>
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>
+        </div>
         <h3>Google Calendar</h3>
-        <p>Shared deadlines, meeting times, and milestones visible to the whole team.</p>
+        <p>Shared deadlines, so nobody argues about when a thing was due.</p>
       </div>
       <div class="card glass">
-        <div class="card-icon">🎥</div>
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="6" width="13" height="12" rx="2"/><path d="m15.5 10.5 6-3.4v9.8l-6-3.4Z"/></svg>
+        </div>
         <h3>Google Meet</h3>
-        <p>Weekly syncs and quick huddles to unblock work and align in real time.</p>
+        <p>Monday sync. Thirty minutes. Recorded for whoever missed it.</p>
       </div>
     </div>
   </section>
 
   <!-- TIMELINE -->
   <section id="timeline" class="wrap">
-    <p class="eyebrow">Project Timeline</p>
-    <h2>How the web came together</h2>
+    <p class="eyebrow">Four weeks</p>
+    <h2>How it actually went</h2>
     <div class="timeline">
       <div class="timeline-item">
         <div class="tl-date">Week 1</div>
         <div class="tl-line"><div class="tl-dot"></div><div class="tl-bar"></div></div>
-        <div class="tl-card glass"><h3>Kickoff &amp; Roles</h3><p>Reviewed the project guidelines together and assigned roles in a shared Doc.</p></div>
+        <div class="tl-card glass"><h3>Kickoff and roles</h3><p>Read the brief together, picked roles, and wrote them into the shared doc so nobody could claim confusion later.</p></div>
       </div>
       <div class="timeline-item">
         <div class="tl-date">Week 2</div>
         <div class="tl-line"><div class="tl-dot"></div><div class="tl-bar"></div></div>
-        <div class="tl-card glass"><h3>Research &amp; Draft</h3><p>Built out content in Docs and Sheets while tracking progress on the shared tracker.</p></div>
+        <div class="tl-card glass"><h3>Research and drafting</h3><p>Wrote the content in Docs and logged every task in the tracker as we went.</p></div>
       </div>
       <div class="timeline-item">
         <div class="tl-date">Week 3</div>
         <div class="tl-line"><div class="tl-dot"></div><div class="tl-bar"></div></div>
-        <div class="tl-card glass"><h3>Design &amp; Review</h3><p>Assembled Slides, gathered feedback in Meet, and refined the site layout.</p></div>
+        <div class="tl-card glass"><h3>Design and review</h3><p>Built the deck, read each other's sections, and cut the parts that were weak.</p></div>
       </div>
       <div class="timeline-item">
         <div class="tl-date">Week 4</div>
         <div class="tl-line"><div class="tl-dot"></div></div>
-        <div class="tl-card glass"><h3>Publish</h3><p>Finalized and published the one-page Google Site for submission.</p></div>
+        <div class="tl-card glass"><h3>Publish</h3><p>Last pass on the copy, then the site went live.</p></div>
       </div>
     </div>
   </section>
 
-  <!-- COMMUNICATION PLAN -->
-  <section id="comms" class="wrap">
-    <p class="eyebrow">Communication Plan</p>
-    <h2>How we stay in sync</h2>
+  <!-- GROUND RULES -->
+  <section id="rules" class="wrap">
+    <p class="eyebrow">Ground rules</p>
+    <h2>What we agreed on in week one</h2>
     <div class="plan-panel glass">
       <ul>
-        <li>Weekly Google Meet sync every Monday to review progress and blockers.</li>
-        <li>Shared Google Doc for meeting notes, always updated live during calls.</li>
-        <li>Task status tracked in a shared Google Sheet, updated after every work session.</li>
+        <li>Monday call at 7pm. Thirty minutes, no exceptions.</li>
+        <li>Notes go into the doc during the call, not after it.</li>
+        <li>Update your row in the tracker the moment you finish something.</li>
       </ul>
       <ul>
-        <li>Deadlines and milestones posted to a shared Google Calendar visible to all members.</li>
-        <li>Feedback on drafts left as comments directly in Docs and Slides.</li>
-        <li>Final files organized in a single shared Drive folder with clear naming.</li>
+        <li>Deadlines go on the shared calendar the day we agree on them.</li>
+        <li>Feedback goes in file comments, never in chat.</li>
+        <li>File names follow the pattern written in the Drive README.</li>
       </ul>
     </div>
   </section>
 
-  <!-- GUIDELINES -->
-  <section id="guidelines" class="wrap">
-    <div class="hero-card glass" style="padding:40px;">
-      <p class="eyebrow">Project Guidelines</p>
-      <h2 style="margin-bottom:12px;">Reference the official brief</h2>
-      <p style="color:var(--text-muted); max-width:560px; margin-bottom:22px;">
-        Replace this card's link with your instructor's project guidelines document
-        so visitors can access the original brief in one click.
+  <!-- BRIEF -->
+  <section id="brief" class="wrap">
+    <div class="hero-card glass" style="padding:38px;">
+      <p class="eyebrow">The assignment</p>
+      <h2 style="margin-bottom:10px;">Read the original brief</h2>
+      <p style="color:var(--text-muted); max-width:540px; margin-bottom:22px;">
+        Point this button at your instructor's guidelines doc before you publish.
       </p>
-      <a class="btn-primary" href="#" target="_blank" rel="noopener">Open Project Guidelines</a>
+      <a class="btn-primary" href="#" target="_blank" rel="noopener">Open the brief</a>
     </div>
   </section>
 
@@ -706,12 +711,12 @@ footer {
 
 <footer class="wrap">
   <div class="footer-row">
-    <p>&copy; 2026 Web-Slingers Collective. Built with Google Workspace.</p>
+    <p>Web-Slingers Collective, 2026. Built in Google Workspace.</p>
     <ul class="footer-links">
       <li><a href="#about">About</a></li>
       <li><a href="#team">Team</a></li>
-      <li><a href="#toolkit">Toolkit</a></li>
-      <li><a href="#comms">Communication</a></li>
+      <li><a href="#tools">Tools</a></li>
+      <li><a href="#rules">Rules</a></li>
     </ul>
   </div>
 </footer>
